@@ -2,36 +2,48 @@ package ru.yandex.praktikum;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.praktikum.page.LoginPage;
+import ru.yandex.praktikum.helper.GenerateData;
 import ru.yandex.praktikum.page.RegistrationPage;
 
-import java.util.Random;
-
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RegistrationTest {
 
     private RegistrationPage registrationPage;
-    private LoginPage loginPage;
+    private String name;
+    private String email;
+    private String password;
 
     @Before
     public void setUp() {
+        GenerateData generateData = new GenerateData();
         registrationPage = open("https://stellarburgers.nomoreparties.site/register", RegistrationPage.class);
-        loginPage = open("https://stellarburgers.nomoreparties.site/register",LoginPage.class);
+        name = generateData.rndName();
+        email = generateData.rndEmail();
+        password = generateData.rndPassword();
     }
 
     @Test
-    public void hello() {
+    public void successRegistration() {
         registrationPage
-                .setRegName("Привет")
-                .setRegEmail("test123312@test.com")
-                .setRegPassword("Qwerty321456")
+                .setRegName(name)
+                .setRegEmail(email)
+                .setRegPassword(password)
                 .clickRegistrationButton();
-        loginPage.setLoginEmail("test123312@test.com")
-                .setLoginPassword("Qwerty321456")
-                .clickLoginButton();
-        sleep(5000);
+
+        assertTrue(registrationPage.returnTrueIfRegistrationSuccess());
+    }
+
+    @Test
+    public void returnErrorIfShortPassword() {
+        registrationPage
+                .setRegName(name)
+                .setRegEmail(email)
+                .setRegPassword("12345")
+                .clickRegistrationButton();
+
+        assertTrue(registrationPage.returnTrueIfShowShortPasswordError());
+
     }
 }

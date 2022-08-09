@@ -1,6 +1,6 @@
 package ru.yandex.praktikum.page;
 
-
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -22,6 +22,10 @@ public class RegistrationPage {
     //Кнопка Зарегистрироваться
     @FindBy(how = How.XPATH, using = ".//button[text()='Зарегистрироваться']")
     private SelenideElement buttonRegister;
+
+    //Ошибка короткого пароля
+    @FindBy(how = How.XPATH, using = ".//p[text()='Некорректный пароль']")
+    private SelenideElement errorPassword;
 
     //Страница Входа
     @FindBy(how = How.XPATH, using = ".//h2[text()='Вход']")
@@ -47,8 +51,12 @@ public class RegistrationPage {
         return this;
     }
 
-    public boolean returnTrueIfRegistrationSuccess(){
-        return textOnLoginPage.isDisplayed();
+    public boolean returnTrueIfShowShortPasswordError() {
+        return errorPassword.exists();
+    }
+
+    public boolean returnTrueIfRegistrationSuccess() {
+        return textOnLoginPage.shouldBe(Condition.visible).exists();
     }
 
 }
