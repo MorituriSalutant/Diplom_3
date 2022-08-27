@@ -1,14 +1,12 @@
 package ru.yandex.praktikum.page;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.sleep;
 
-public class LoginPage {
+public class LoginPage extends GeneralPage {
 
     //Страница Входа
     @FindBy(how = How.XPATH, using = ".//h2[text()='Вход']")
@@ -37,7 +35,13 @@ public class LoginPage {
         return this;
     }
 
-    public LoginPage clickLoginButton() {
+    public LoginPage inputEmailPassword(String email, String password) {
+        setLoginEmail(email);
+        setLoginPassword(password);
+        return this;
+    }
+
+    public LoginPage clickMainLoginButton() {
         buttonLogin.click();
         return this;
     }

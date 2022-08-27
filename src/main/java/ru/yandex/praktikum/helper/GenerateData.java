@@ -1,20 +1,46 @@
 package ru.yandex.praktikum.helper;
 
 import com.github.javafaker.Faker;
+import io.restassured.response.Response;
+import ru.yandex.praktikum.helper.api.UserApiClient;
+import ru.yandex.praktikum.helper.api.UserReqJson;
 
 public class GenerateData {
-    public String rndName() {
-        Faker faker = new Faker();
-        return faker.name().name();
+    private static String email;
+    private static String password;
+    private static String name;
+    private static final Faker faker = new Faker();
+
+    private static void createUserData() {
+        generateEmail();
+        generatePassword();
+        generateName();
     }
 
-    public String rndEmail() {
-        Faker faker = new Faker();
-        return faker.internet().emailAddress();
+    public static UserReqJson generateUserAccount() {
+        createUserData();
+        return new UserReqJson(email, password, name);
     }
 
-    public String rndPassword() {
-        Faker faker = new Faker();
-        return faker.internet().password();
+    public static void generateEmail() {
+        email = faker.internet().emailAddress();
+    }
+
+    public static void generatePassword() {
+        password = faker.internet().password();
+    }
+
+    public static void generateName() {
+        name = faker.name().username();
+    }
+
+    public static void deleteUserAccount(UserReqJson userReqJson) {
+        UserApiClient userApiClient = new UserApiClient();
+        Response responseAuth = userApiClient.authorization(userReqJson);
+        if (responseAuth.statusCode() == 200) {
+            userApiClient.deleteUser();
+        } else {
+            System.out.println("Пользователь создан не был");
+        }
     }
 }

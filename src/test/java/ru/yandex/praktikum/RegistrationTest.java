@@ -1,8 +1,10 @@
 package ru.yandex.praktikum;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.praktikum.helper.GenerateData;
+import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.RegistrationPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -10,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RegistrationTest {
 
+    private UserReqJson userReqJson;
     private RegistrationPage registrationPage;
     private String name;
     private String email;
@@ -17,33 +20,35 @@ public class RegistrationTest {
 
     @Before
     public void setUp() {
-        GenerateData generateData = new GenerateData();
+        userReqJson = GenerateData.generateUserAccount();
         registrationPage = open("https://stellarburgers.nomoreparties.site/register", RegistrationPage.class);
-        name = generateData.rndName();
-        email = generateData.rndEmail();
-        password = generateData.rndPassword();
+        name = userReqJson.getName();
+        email = userReqJson.getEmail();
+        password = userReqJson.getPassword();
+
     }
 
     @Test
-    public void successRegistration() {
+    public void successRegistrationTest() {
         registrationPage
-                .setRegName(name)
-                .setRegEmail(email)
-                .setRegPassword(password)
+                .inputNameEmailPassword(name, email, password)
                 .clickRegistrationButton();
 
         assertTrue(registrationPage.returnTrueIfRegistrationSuccess());
     }
 
     @Test
-    public void returnErrorIfShortPassword() {
+    public void returnErrorIfShortPasswordTest() {
         registrationPage
-                .setRegName(name)
-                .setRegEmail(email)
-                .setRegPassword("12345")
+                .inputNameEmailPassword(name, email, "12345")
                 .clickRegistrationButton();
 
         assertTrue(registrationPage.returnTrueIfShowShortPasswordError());
 
+    }
+
+    @After
+    public void tearDown() {
+        GenerateData.deleteUserAccount(userReqJson);
     }
 }
