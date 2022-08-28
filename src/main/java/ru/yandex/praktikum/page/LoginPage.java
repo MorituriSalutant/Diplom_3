@@ -52,8 +52,7 @@ public class LoginPage extends GeneralPage {
     }
 
     public LoginPage inputEmailPasswordAndLogIn(String email, String password) {
-        setLoginEmail(email)
-                .setLoginPassword(password)
+        inputEmailPassword(email, password)
                 .clickAcceptLogInButton();
         return this;
     }
@@ -64,17 +63,17 @@ public class LoginPage extends GeneralPage {
         return page(GeneralPage.class);
     }
 
-    public RegistrationPage clickHyperLinkRegister(){
+    public RegistrationPage clickHyperLinkRegister() {
         hyperLinkRegister.click();
         return page(RegistrationPage.class);
     }
 
-    public RestorePasswordPage clickHyperRestorePassword(){
+    public RestorePasswordPage clickHyperRestorePassword() {
         hyperLinkRestorePassword.click();
         return page(RestorePasswordPage.class);
     }
 
-    public boolean returnTrueIfOpenLogInPage(){
+    public boolean returnTrueIfOpenLogInPage() {
         return textOnLoginPage.shouldBe(Condition.visible).exists();
     }
 }

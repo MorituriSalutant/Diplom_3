@@ -5,7 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.page;
 
 public class GeneralPage {
 
@@ -52,35 +53,40 @@ public class GeneralPage {
         return this;
     }
 
-    public LoginPage clickHeaderAccountButton() {
+    public LoginPage clickHeaderAccountWithoutAuthButton() {
         headerPersonalAccountButton.click();
         return page(LoginPage.class);
     }
 
-    public void clickMainCreateOrderButton(){
+    public UserAccountPage clickHeaderAccountWithAuthButton() {
+        headerPersonalAccountButton.click();
+        return page(UserAccountPage.class);
+    }
+
+    public void clickMainCreateOrderButton() {
         createOrderButton.click();
     }
 
-    public RegistrationPage openRegisterPage(){
+    public RegistrationPage openRegisterPage() {
         open("https://stellarburgers.nomoreparties.site/register");
         return page(RegistrationPage.class);
     }
 
-    public LoginPage openLoginPage(){
+    public LoginPage openLoginPage() {
         open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
         return page(LoginPage.class);
     }
 
-    public RestorePasswordPage openRestorePasswrodPage(){
+    public RestorePasswordPage openRestorePasswrodPage() {
         open("https://stellarburgers.nomoreparties.site/forgot-password", RestorePasswordPage.class);
         return page(RestorePasswordPage.class);
     }
 
-    public boolean returnTrueIfCreateOrderButtonExist(){
+    public boolean returnTrueIfCreateOrderButtonExist() {
         return createOrderButton.shouldBe(Condition.visible).exists();
     }
 
-    public boolean returnTrueIfOpenConstructor(){
+    public boolean returnTrueIfOpenConstructor() {
         return textCreateBurger.shouldBe(Condition.visible).exists();
     }
 

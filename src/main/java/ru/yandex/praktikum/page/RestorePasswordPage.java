@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class RestorePasswordPage {
+public class RestorePasswordPage extends GeneralPage {
     //Поле Email.
     @FindBy(how = How.XPATH, using = ".//label[text()='Email']/parent::div//input")
     private SelenideElement inputEmailRestorePage;
@@ -30,7 +30,7 @@ public class RestorePasswordPage {
         restoreButton.click();
     }
 
-    public LoginPage clickHyperLogIn(){
+    public LoginPage clickHyperLogIn() {
         hyperLinkLogIn.click();
         return page(LoginPage.class);
     }

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
-public class AuthorizationTest {
+public class LogOutTest {
     private UserReqJson userReqJson;
     private GeneralPage generalPage;
     private String email;
@@ -30,36 +30,12 @@ public class AuthorizationTest {
 
     @Test
     public void successLoginFromMainPageButtonLogInTest() {
-        generalPage.clickMainLogInButton()
-                .inputEmailPasswordAndLogIn(email, password);
+        boolean expect = generalPage.openLoginPage()
+                .inputEmailPasswordAndLogIn(email, password)
+                .clickHeaderAccountWithAuthButton()
+                .clickLogOutButton().returnTrueIfOpenLogInPage();
 
-        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
-    }
-
-    @Test
-    public void successLoginFromMainPageHeaderButtonAccountTest() {
-        generalPage.clickHeaderAccountWithoutAuthButton()
-                .inputEmailPasswordAndLogIn(email, password);
-
-        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
-    }
-
-    @Test
-    public void successLoginFromRegistrationPageAccountTest() {
-        generalPage.openRegisterPage()
-                .clickHyperLinkLogIn()
-                .inputEmailPasswordAndLogIn(email, password);
-
-        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
-    }
-
-    @Test
-    public void successLoginFromRestorePasswordTest() {
-        generalPage.openRestorePasswrodPage()
-                .clickHyperLogIn()
-                .inputEmailPasswordAndLogIn(email, password);
-
-        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
+        assertTrue(expect);
     }
 
     @After

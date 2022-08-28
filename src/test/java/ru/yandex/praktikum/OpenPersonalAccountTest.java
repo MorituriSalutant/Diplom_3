@@ -7,8 +7,7 @@ import ru.yandex.praktikum.page.GeneralPage;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OpenPersonalAccountTest {
     private GeneralPage generalPage;
@@ -20,9 +19,10 @@ public class OpenPersonalAccountTest {
 
     @Test
     public void openPersonalAccountTest() {
-        generalPage.clickHeaderAccountButton();
+        boolean expect = generalPage.clickHeaderAccountWithoutAuthButton()
+                .returnTrueIfOpenLogInPage();
 
-        assertEquals(url(), "https://stellarburgers.nomoreparties.site/login");
+        assertTrue(expect);
     }
 
     @After
