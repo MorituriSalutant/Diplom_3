@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.page;
 
 public class LoginPage extends GeneralPage {
 
@@ -22,7 +23,15 @@ public class LoginPage extends GeneralPage {
 
     //Кнопка Войти
     @FindBy(how = How.XPATH, using = ".//button[text()='Войти']")
-    private SelenideElement buttonLogin;
+    private SelenideElement acceptLogInButton;
+
+    //Гиперссылка Зарегистрироваться
+    @FindBy(how = How.XPATH, using = ".//a[text()='Зарегистрироваться']")
+    private SelenideElement hyperLinkRegister;
+
+    //Гиперссылка Восстановить пароль
+    @FindBy(how = How.XPATH, using = ".//a[text()='Восстановить пароль']']")
+    private SelenideElement hyperLinkRestorePassword;
 
     public LoginPage setLoginEmail(String email) {
         inputEmail.shouldBe(visible);
@@ -35,14 +44,32 @@ public class LoginPage extends GeneralPage {
         return this;
     }
 
-    public LoginPage inputEmailPassword(String email, String password) {
+    private LoginPage inputEmailPassword(String email, String password) {
         setLoginEmail(email);
         setLoginPassword(password);
         return this;
     }
 
-    public LoginPage clickMainLoginButton() {
-        buttonLogin.click();
+    public LoginPage inputEmailPasswordAndLogIn(String email, String password) {
+        setLoginEmail(email)
+                .setLoginPassword(password)
+                .clickAcceptLogInButton();
         return this;
+    }
+
+
+    public GeneralPage clickAcceptLogInButton() {
+        acceptLogInButton.click();
+        return page(GeneralPage.class);
+    }
+
+    public RegistrationPage clickHyperLinkRegister(){
+        hyperLinkRegister.click();
+        return page(RegistrationPage.class);
+    }
+
+    public RestorePasswordPage clickHyperRestorePassword(){
+        hyperLinkRestorePassword.click();
+        return page(RestorePasswordPage.class);
     }
 }

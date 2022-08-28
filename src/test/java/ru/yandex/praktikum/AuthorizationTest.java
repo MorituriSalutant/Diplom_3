@@ -7,9 +7,9 @@ import ru.yandex.praktikum.helper.GenerateData;
 import ru.yandex.praktikum.helper.api.UserApiClient;
 import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.GeneralPage;
+import ru.yandex.praktikum.page.RegistrationPage;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
 public class AuthorizationTest {
@@ -26,21 +26,45 @@ public class AuthorizationTest {
         generalPage = open("https://stellarburgers.nomoreparties.site/", GeneralPage.class);
         email = userReqJson.getEmail();
         password = userReqJson.getPassword();
-
-
     }
 
     @Test
-    public void successLoginFromMainPageButtonTest() {
-        generalPage.clickMainLoginButton()
-                .inputEmailPassword(email, password)
-                .clickMainLoginButton();
-        sleep(5000);
-        assertTrue(true);
+    public void successLoginFromMainPageButtonLogInTest() {
+        generalPage.clickMainLogInButton()
+                .inputEmailPasswordAndLogIn(email, password);
+
+        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
+    }
+
+    @Test
+    public void successLoginFromMainPageHeaderButtonAccountTest() {
+        generalPage.clickHeaderAccountButton()
+                .inputEmailPasswordAndLogIn(email, password);
+
+        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
+    }
+
+    @Test
+    public void successLoginFromRegistrationPageAccountTest(){
+        generalPage.openRegisterPage()
+                .clickHyperLinkLogIn()
+                .inputEmailPasswordAndLogIn(email, password);
+
+        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
+    }
+
+    @Test
+    public void successLoginFromRestorePasswordTest(){
+        generalPage.openRestorePasswrodPage()
+                .clickHyperLogIn()
+                .inputEmailPasswordAndLogIn(email, password);
+
+        assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());
     }
 
     @After
     public void tearDown() {
+        closeWebDriver();
         GenerateData.deleteUserAccount(userReqJson);
     }
 }

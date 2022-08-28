@@ -33,6 +33,10 @@ public class RegistrationPage extends GeneralPage {
     @FindBy(how = How.XPATH, using = ".//h2[text()='Вход']")
     private SelenideElement textOnLoginPage;
 
+    //Гиперссылка Войти
+    @FindBy(how = How.XPATH, using = ".//a[text()='Войти']")
+    private SelenideElement hyperLinkLogIn;
+
     public RegistrationPage setRegName(String name) {
         inputName.setValue(name);
         return this;
@@ -51,6 +55,11 @@ public class RegistrationPage extends GeneralPage {
     public RegistrationPage clickRegistrationButton() {
         buttonRegister.click();
         return this;
+    }
+
+    public LoginPage clickHyperLinkLogIn(){
+        hyperLinkLogIn.click();
+        return page(LoginPage.class);
     }
 
     public boolean returnTrueIfShowShortPasswordError() {
