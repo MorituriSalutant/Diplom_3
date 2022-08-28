@@ -7,9 +7,9 @@ import ru.yandex.praktikum.helper.GenerateData;
 import ru.yandex.praktikum.helper.api.UserApiClient;
 import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.GeneralPage;
-import ru.yandex.praktikum.page.RegistrationPage;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
 public class AuthorizationTest {
@@ -45,7 +45,7 @@ public class AuthorizationTest {
     }
 
     @Test
-    public void successLoginFromRegistrationPageAccountTest(){
+    public void successLoginFromRegistrationPageAccountTest() {
         generalPage.openRegisterPage()
                 .clickHyperLinkLogIn()
                 .inputEmailPasswordAndLogIn(email, password);
@@ -54,7 +54,7 @@ public class AuthorizationTest {
     }
 
     @Test
-    public void successLoginFromRestorePasswordTest(){
+    public void successLoginFromRestorePasswordTest() {
         generalPage.openRestorePasswrodPage()
                 .clickHyperLogIn()
                 .inputEmailPasswordAndLogIn(email, password);

@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.page;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -71,5 +72,9 @@ public class LoginPage extends GeneralPage {
     public RestorePasswordPage clickHyperRestorePassword(){
         hyperLinkRestorePassword.click();
         return page(RestorePasswordPage.class);
+    }
+
+    public boolean returnTrueIfOpenLogInPage(){
+        return textOnLoginPage.shouldBe(Condition.visible).exists();
     }
 }

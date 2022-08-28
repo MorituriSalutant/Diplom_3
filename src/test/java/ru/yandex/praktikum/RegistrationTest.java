@@ -7,6 +7,7 @@ import ru.yandex.praktikum.helper.GenerateData;
 import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.RegistrationPage;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
@@ -31,8 +32,7 @@ public class RegistrationTest {
     @Test
     public void successRegistrationTest() {
         registrationPage
-                .inputNameEmailPassword(name, email, password)
-                .clickRegistrationButton();
+                .inputNameEmailPasswordAndRegister(name, email, password);
 
         assertTrue(registrationPage.returnTrueIfRegistrationSuccess());
     }
@@ -40,8 +40,7 @@ public class RegistrationTest {
     @Test
     public void returnErrorIfShortPasswordTest() {
         registrationPage
-                .inputNameEmailPassword(name, email, "12345")
-                .clickRegistrationButton();
+                .inputNameEmailPasswordAndRegister(name, email, "12345");
 
         assertTrue(registrationPage.returnTrueIfShowShortPasswordError());
 
@@ -49,6 +48,7 @@ public class RegistrationTest {
 
     @After
     public void tearDown() {
+        closeWebDriver();
         GenerateData.deleteUserAccount(userReqJson);
     }
 }

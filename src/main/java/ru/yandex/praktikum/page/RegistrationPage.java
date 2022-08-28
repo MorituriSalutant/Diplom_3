@@ -57,7 +57,7 @@ public class RegistrationPage extends GeneralPage {
         return this;
     }
 
-    public LoginPage clickHyperLinkLogIn(){
+    public LoginPage clickHyperLinkLogIn() {
         hyperLinkLogIn.click();
         return page(LoginPage.class);
     }
@@ -66,10 +66,11 @@ public class RegistrationPage extends GeneralPage {
         return errorPassword.exists();
     }
 
-    public RegistrationPage inputNameEmailPassword(String name, String email, String password) {
-        setRegName(name).
-                setRegEmail(email).
-                setRegPassword(password);
+    public RegistrationPage inputNameEmailPasswordAndRegister(String name, String email, String password) {
+        setRegName(name)
+                .setRegEmail(email)
+                .setRegPassword(password)
+                .clickRegistrationButton();
         return this;
     }
 

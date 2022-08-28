@@ -26,12 +26,30 @@ public class GeneralPage {
     private SelenideElement mainLogInButton;
 
     //Кнопка Оформить заказ
+    @FindBy(how = How.XPATH, using = ".//h1[text()='Соберите бургер']")
+    private SelenideElement textCreateBurger;
+
+    //Текст Соберите бургер
     @FindBy(how = How.XPATH, using = ".//button[text()='Оформить заказ']")
     private SelenideElement createOrderButton;
+
+    //Логотип
+    @FindBy(how = How.XPATH, using = ".//div/a[@href='/']")
+    private SelenideElement burgerLogo;
 
     public LoginPage clickMainLogInButton() {
         mainLogInButton.click();
         return page(LoginPage.class);
+    }
+
+    public GeneralPage clickHeaderConstructorButton() {
+        headerConstructorButton.click();
+        return this;
+    }
+
+    public GeneralPage clickHeaderLogo() {
+        burgerLogo.click();
+        return this;
     }
 
     public LoginPage clickHeaderAccountButton() {
@@ -60,6 +78,10 @@ public class GeneralPage {
 
     public boolean returnTrueIfCreateOrderButtonExist(){
         return createOrderButton.shouldBe(Condition.visible).exists();
+    }
+
+    public boolean returnTrueIfOpenConstructor(){
+        return textCreateBurger.shouldBe(Condition.visible).exists();
     }
 
 
