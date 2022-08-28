@@ -3,6 +3,7 @@ package ru.yandex.praktikum;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.yandex.praktikum.driver.DriverInitialization;
 import ru.yandex.praktikum.helper.GenerateData;
 import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.RegistrationPage;
@@ -21,6 +22,7 @@ public class RegistrationTest {
 
     @Before
     public void setUp() {
+        new DriverInitialization().startBrowser();
         userReqJson = GenerateData.generateUserAccount();
         registrationPage = open("https://stellarburgers.nomoreparties.site/register", RegistrationPage.class);
         name = userReqJson.getName();
