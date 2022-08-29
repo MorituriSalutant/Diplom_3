@@ -17,7 +17,7 @@ public class DriverInitialization {
         //Настройки браузера
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        //        options.addArguments("--headless");
+        //options.addArguments("--headless");
         //Запуск кастомного драйвера
         WebDriver driver = new ChromeDriver(options);
         WebDriverRunner.setWebDriver(driver);
