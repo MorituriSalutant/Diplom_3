@@ -34,6 +34,10 @@ public class LoginPage extends GeneralPage {
     @FindBy(how = How.XPATH, using = ".//a[text()='Восстановить пароль']']")
     private SelenideElement hyperLinkRestorePassword;
 
+    //Кнопка Выход
+    @FindBy(how = How.XPATH, using = ".//button[text()='Выход']")
+    private SelenideElement logOutButton;
+
     public LoginPage setLoginEmail(String email) {
         inputEmail.shouldBe(visible);
         inputEmail.setValue(email);
@@ -71,6 +75,11 @@ public class LoginPage extends GeneralPage {
     public RestorePasswordPage clickHyperRestorePassword() {
         hyperLinkRestorePassword.click();
         return page(RestorePasswordPage.class);
+    }
+
+    public LoginPage clickLogOutButton() {
+        logOutButton.click();
+        return this;
     }
 
     public boolean returnTrueIfOpenLogInPage() {

@@ -40,7 +40,7 @@ public class AuthorizationTest {
 
     @Test
     public void successLoginFromMainPageHeaderButtonAccountTest() {
-        generalPage.clickHeaderAccountWithoutAuthButton()
+        generalPage.clickHeaderAccountButton()
                 .inputEmailPasswordAndLogIn(email, password);
 
         assertTrue(generalPage.returnTrueIfCreateOrderButtonExist());

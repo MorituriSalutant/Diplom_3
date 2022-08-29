@@ -21,7 +21,7 @@ public class OpenPersonalAccountTest {
 
     @Test
     public void openPersonalAccountTest() {
-        boolean expect = generalPage.clickHeaderAccountWithoutAuthButton()
+        boolean expect = generalPage.clickHeaderAccountButton()
                 .returnTrueIfOpenLogInPage();
 
         assertTrue(expect);

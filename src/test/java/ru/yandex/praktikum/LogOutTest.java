@@ -34,8 +34,9 @@ public class LogOutTest {
     public void successLoginFromMainPageButtonLogInTest() {
         boolean expect = generalPage.openLoginPage()
                 .inputEmailPasswordAndLogIn(email, password)
-                .clickHeaderAccountWithAuthButton()
-                .clickLogOutButton().returnTrueIfOpenLogInPage();
+                .clickHeaderAccountButton()
+                .clickLogOutButton()
+                .returnTrueIfOpenLogInPage();
 
         assertTrue(expect);
     }
