@@ -1,6 +1,7 @@
 package ru.yandex.praktikum.helper;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import ru.yandex.praktikum.helper.api.UserApiClient;
 import ru.yandex.praktikum.helper.api.UserReqJson;
@@ -17,6 +18,7 @@ public class GenerateData {
         generateName();
     }
 
+    @Step("Генерация данных пользователя")
     public static UserReqJson generateUserAccount() {
         createUserData();
         return new UserReqJson(email, password, name);
@@ -34,6 +36,7 @@ public class GenerateData {
         name = faker.name().username();
     }
 
+    @Step("Удаление пользователя с почтой {userReqJson.email} и паролем {userReqJson.password}")
     public static void deleteUserAccount(UserReqJson userReqJson) {
         UserApiClient userApiClient = new UserApiClient();
         Response responseAuth = userApiClient.authorization(userReqJson);

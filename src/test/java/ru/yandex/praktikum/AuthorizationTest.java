@@ -1,5 +1,7 @@
 package ru.yandex.praktikum;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
+@Feature("Авторизация")
 public class AuthorizationTest {
     private UserReqJson userReqJson;
     private GeneralPage generalPage;
@@ -31,6 +34,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
     public void successLoginFromMainPageButtonLogInTest() {
         generalPage.clickMainLogInButton()
                 .inputEmailPasswordAndLogIn(email, password);
@@ -39,6 +43,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку «Личный кабинет»")
     public void successLoginFromMainPageHeaderButtonAccountTest() {
         generalPage.clickHeaderAccountButton()
                 .inputEmailPasswordAndLogIn(email, password);
@@ -47,6 +52,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку в форме регистрации")
     public void successLoginFromRegistrationPageAccountTest() {
         generalPage.openRegisterPage()
                 .clickHyperLinkLogIn()
@@ -56,6 +62,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку в форме восстановления пароля")
     public void successLoginFromRestorePasswordTest() {
         generalPage.openRestorePasswrodPage()
                 .clickHyperLogIn()

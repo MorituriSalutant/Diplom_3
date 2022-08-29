@@ -1,5 +1,7 @@
 package ru.yandex.praktikum;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
+@Feature("Выход из аккаунта")
 public class LogOutTest {
     private UserReqJson userReqJson;
     private GeneralPage generalPage;
@@ -31,6 +34,7 @@ public class LogOutTest {
     }
 
     @Test
+    @DisplayName("Выход по кнопке «Выйти» в личном кабинете")
     public void successLoginFromMainPageButtonLogInTest() {
         boolean expect = generalPage.openLoginPage()
                 .inputEmailPasswordAndLogIn(email, password)

@@ -1,5 +1,7 @@
 package ru.yandex.praktikum;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +14,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
+@Feature("Регистрация")
 public class RegistrationTest {
 
     private UserReqJson userReqJson;
@@ -32,6 +35,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Успешная регистрация")
     public void successRegistrationTest() {
         registrationPage
                 .inputNameEmailPasswordAndRegister(name, email, password);
@@ -40,6 +44,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка ошибки что пароль должен быть больше пяти знаков")
     public void returnErrorIfShortPasswordTest() {
         registrationPage
                 .inputNameEmailPasswordAndRegister(name, email, "12345");

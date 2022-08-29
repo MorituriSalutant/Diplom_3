@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.helper.api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.filter.Filter;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -13,5 +14,6 @@ public class RestAssuredClient {
     protected Filter res = new ResponseLoggingFilter();
     protected RequestSpecification reqSpec = with()
             .filters(req, res)
+            .filter(new AllureRestAssured())
             .baseUri(BASE_URL);
 }

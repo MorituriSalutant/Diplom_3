@@ -1,6 +1,7 @@
 package ru.yandex.praktikum.page;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -30,6 +31,7 @@ public class RestorePasswordPage extends GeneralPage {
         restoreButton.click();
     }
 
+    @Step("Нажата гиперссылка Войти")
     public LoginPage clickHyperLogIn() {
         hyperLinkLogIn.click();
         return page(LoginPage.class);
