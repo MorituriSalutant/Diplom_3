@@ -49,15 +49,15 @@ public class GeneralPage {
     private SelenideElement constructorFillingButton;
 
     //Конструктор раздел в списке - Булки
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Булки']")
+    @FindBy(how = How.XPATH, using = ".//span[text()='Булки']/..")
     private SelenideElement constructorBunSectionInList;
 
     //Конструктор раздел в списке - Соусы
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Соусы']")
+    @FindBy(how = How.XPATH, using = ".//span[text()='Соусы']/..")
     private SelenideElement constructorSaucesSectionInList;
 
     //Конструктор раздел в списке - Начинки
-    @FindBy(how = How.XPATH, using = ".//h2[text()='Начинки']")
+    @FindBy(how = How.XPATH, using = ".//span[text()='Начинки']/..")
     private SelenideElement constructorFillingSectionInList;
 
     //Логотип
@@ -90,41 +90,35 @@ public class GeneralPage {
 
     @Step("В конструкторе нажата кнопка Булки")
     public GeneralPage clickConstructorBunButton() {
-        if (!returnTrueIfElementPressed(constructorBunButton)) {
-            constructorBunButton.click();
-        }
+        checksIfTheButtonIsPressed(constructorBunButton);
         return this;
     }
 
     @Step("В конструкторе нажата кнопка Соусы")
     public GeneralPage clickConstructorSaucesButton() {
-        if (!returnTrueIfElementPressed(constructorSaucesButton)) {
-            constructorSaucesButton.click();
-        }
+        checksIfTheButtonIsPressed(constructorSaucesButton);
         return this;
     }
 
     @Step("В конструкторе нажата кнопка Начинки")
     public GeneralPage clickConstructorFillingButton() {
-        if (!returnTrueIfElementPressed(constructorFillingButton)) {
-            constructorFillingButton.click();
-        }
+        checksIfTheButtonIsPressed(constructorFillingButton);
         return this;
     }
 
     @Step("Отображается раздел с булками")
     public boolean returnTrueIfBunSectionIsDisplayed() {
-        return constructorBunSectionInList.shouldBe(Condition.visible).isDisplayed();
+        return checkIfTheCurrentListShow(constructorBunSectionInList);
     }
 
     @Step("Отображается раздел с соусами")
     public boolean returnTrueIfSaucesSectionIsDisplayed() {
-        return constructorSaucesSectionInList.shouldBe(Condition.visible).isDisplayed();
+        return checkIfTheCurrentListShow(constructorSaucesSectionInList);
     }
 
     @Step("Отображается раздел с начинкой")
     public boolean returnTrueIfFillingSectionIsDisplayed() {
-        return constructorFillingSectionInList.shouldBe(Condition.visible).isDisplayed();
+        return checkIfTheCurrentListShow(constructorFillingSectionInList);
     }
 
     @Step("Открыта страница регистрации")
@@ -140,7 +134,7 @@ public class GeneralPage {
     }
 
     @Step("Открыта страница восстановления пароля")
-    public RestorePasswordPage openRestorePasswrodPage() {
+    public RestorePasswordPage openRestorePasswordPage() {
         open(Url.urlRestorePassword, RestorePasswordPage.class);
         return page(RestorePasswordPage.class);
     }
@@ -155,10 +149,18 @@ public class GeneralPage {
         return textCreateBurger.shouldBe(Condition.visible).exists();
     }
 
-    @Step("Проверка что раздел в конструкторе открыт")
-    private boolean returnTrueIfElementPressed(SelenideElement element) {
+    @Step("Проверка что раздел активен")
+    private boolean returnTrueIfElementHaveClassCurrent(SelenideElement element) {
         return element.has(Condition.attributeMatching("class", ".*current.*"));
     }
 
+    private boolean checkIfTheCurrentListShow(SelenideElement element){
+        return element.shouldHave(Condition.attributeMatching("class", ".*current.*")).exists();
+    }
 
+    private void checksIfTheButtonIsPressed(SelenideElement button) {
+        if (!returnTrueIfElementHaveClassCurrent(button)) {
+            button.click();
+        }
+    }
 }

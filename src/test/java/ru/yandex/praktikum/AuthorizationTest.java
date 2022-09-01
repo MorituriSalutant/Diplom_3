@@ -65,7 +65,7 @@ public class AuthorizationTest {
     @Test
     @DisplayName("Вход через кнопку в форме восстановления пароля")
     public void successLoginFromRestorePasswordTest() {
-        generalPage.openRestorePasswrodPage()
+        generalPage.openRestorePasswordPage()
                 .clickHyperLogIn()
                 .inputEmailPasswordAndLogIn(email, password);
 
