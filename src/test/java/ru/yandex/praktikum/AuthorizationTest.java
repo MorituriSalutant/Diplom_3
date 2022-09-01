@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.praktikum.driver.DriverInitialization;
 import ru.yandex.praktikum.helper.GenerateData;
+import ru.yandex.praktikum.helper.Url;
 import ru.yandex.praktikum.helper.api.UserApiClient;
 import ru.yandex.praktikum.helper.api.UserReqJson;
 import ru.yandex.praktikum.page.GeneralPage;
@@ -28,7 +29,7 @@ public class AuthorizationTest {
         UserApiClient userApiClient = new UserApiClient();
         userReqJson = GenerateData.generateUserAccount();
         userApiClient.createUser(userReqJson);
-        generalPage = open("https://stellarburgers.nomoreparties.site/", GeneralPage.class);
+        generalPage = open(Url.urlBase, GeneralPage.class);
         email = userReqJson.getEmail();
         password = userReqJson.getPassword();
     }

@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.praktikum.driver.DriverInitialization;
+import ru.yandex.praktikum.helper.Url;
 import ru.yandex.praktikum.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -19,7 +20,7 @@ public class OpenConstructorFromLogInPageTest {
     @Before
     public void setUp() {
         new DriverInitialization().startBrowser();
-        loginPage = open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
+        loginPage = open(Url.urlLogin, LoginPage.class);
     }
 
     @Test

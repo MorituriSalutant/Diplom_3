@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import ru.yandex.praktikum.helper.Url;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
@@ -128,19 +129,19 @@ public class GeneralPage {
 
     @Step("Открыта страница регистрации")
     public RegistrationPage openRegisterPage() {
-        open("https://stellarburgers.nomoreparties.site/register");
+        open(Url.urlBase);
         return page(RegistrationPage.class);
     }
 
     @Step("Открыта страница авторизации")
     public LoginPage openLoginPage() {
-        open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
+        open(Url.urlLogin, LoginPage.class);
         return page(LoginPage.class);
     }
 
     @Step("Открыта страница восстановления пароля")
     public RestorePasswordPage openRestorePasswrodPage() {
-        open("https://stellarburgers.nomoreparties.site/forgot-password", RestorePasswordPage.class);
+        open(Url.urlRestorePassword, RestorePasswordPage.class);
         return page(RestorePasswordPage.class);
     }
 
