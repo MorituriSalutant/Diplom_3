@@ -25,10 +25,10 @@ public class OpenPersonalAccountTest {
     @Test
     @DisplayName("Переход по клику на «Личный кабинет».")
     public void openPersonalAccountTest() {
-        boolean expect = generalPage.clickHeaderAccountButton()
+        boolean expected = generalPage.clickHeaderAccountButton()
                 .returnTrueIfOpenLogInPage();
 
-        assertTrue(expect);
+        assertTrue(expected);
     }
 
     @After

@@ -36,13 +36,13 @@ public class LogOutTest {
     @Test
     @DisplayName("Выход по кнопке «Выйти» в личном кабинете")
     public void successLoginFromMainPageButtonLogInTest() {
-        boolean expect = generalPage.openLoginPage()
+        boolean expected = generalPage.openLoginPage()
                 .inputEmailPasswordAndLogIn(email, password)
                 .clickHeaderAccountButton()
                 .clickLogOutButton()
                 .returnTrueIfOpenLogInPage();
 
-        assertTrue(expect);
+        assertTrue(expected);
     }
 
     @After

@@ -26,31 +26,31 @@ public class ConstructorTest {
     @Test
     @DisplayName("Переходы к разделу Булки")
     public void openSectionBunTest() {
-        boolean expect = generalPage
+        boolean expected = generalPage
                 .clickConstructorBunButton()
                 .returnTrueIfBunSectionIsDisplayed();
 
-        assertTrue(expect);
+        assertTrue(expected);
     }
 
     @Test
     @DisplayName("Переходы к разделу Соусы")
     public void openSectionSaucesTest() {
-        boolean expect = generalPage
+        boolean expected = generalPage
                 .clickConstructorSaucesButton()
                 .returnTrueIfSaucesSectionIsDisplayed();
 
-        assertTrue(expect);
+        assertTrue(expected);
     }
 
     @Test
     @DisplayName("Переходы к разделу Начинки")
     public void openSectionFillingTest() {
-        boolean expect = generalPage
+        boolean expected = generalPage
                 .clickConstructorFillingButton()
                 .returnTrueIfFillingSectionIsDisplayed();
 
-        assertTrue(expect);
+        assertTrue(expected);
     }
 
     @After
