@@ -129,7 +129,7 @@ public class GeneralPage {
 
     @Step("Открыта страница регистрации")
     public RegistrationPage openRegisterPage() {
-        open(Url.urlBase);
+        open(Url.urlRegistration);
         return page(RegistrationPage.class);
     }
 
